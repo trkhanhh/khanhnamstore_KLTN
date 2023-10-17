@@ -1,0 +1,251 @@
+.line {
+    margin-left: 11px;
+}
+
+.mySlides {
+  position: relative;
+  max-height: 545px;
+  
+}
+
+/* Add a pointer when hovering over the thumbnail images */
+.cursor {
+  cursor: pointer;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  text-align: center;
+  padding: 16px;
+  margin-top: -50px;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  -webkit-user-select: none;
+  padding: 0;
+  color: #ffffff9e;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.prev {
+    top: 49px;
+}
+
+/* Position the "next button" to the right */
+.next {
+  bottom: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* Container for image text */
+.caption-container {
+  text-align: center;
+  background-color: #222;
+  padding: 2px 16px;
+  color: white;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Six columns side by side */
+.column {
+  float: left;
+  width: 16.66%;
+}
+
+/* Add a transparency effect for thumnbail images */
+.demo {
+  opacity: 0.6;
+}
+
+.active,
+.demo:hover {
+  opacity: 1;
+}
+
+/***************************/
+div.stars {
+  width: 270px;
+  display: inline-block;
+}
+ 
+input.star { display: none; }
+ 
+label.star {
+  float: right;
+  padding: 2px;
+  font-size: 30px;
+  color: #444;
+  transition: all .2s;
+}
+ 
+input.star:checked ~ label.star:before {
+  content: '\f005';
+  color: #FD4;
+  transition: all .25s;
+}
+ 
+input.star-1:checked ~ label.star:before {
+  color: #FE7;
+  text-shadow: 0 0 20px #952;
+}
+ 
+input.star-5:checked ~ label.star:before { color: #F62; }
+ 
+label.star:hover { transform: rotate(15deg) scale(1.3); }
+ 
+label.star:before {
+  content: '\f006';
+  font-family: FontAwesome;
+}
+
+.info-star label {
+  font-size: 15px;
+}
+.info-star .star_yell {
+  color: #FE7;
+}
+.info-star .star_yell:before {
+  content: '\f005';
+  color: #FD4;
+  font-family: FontAwesome;
+}
+
+.info-star-item:before {
+  content: '\f006';
+  font-family: FontAwesome;
+}
+
+/**************/
+/* src/ProductSlideshow.css */
+.product-slideshow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  position: relative;
+}
+
+.product-slide img {
+  max-width: 100%;
+  height: auto;
+}
+
+.product-name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+.product-description {
+  margin-top: 0.5rem;
+}
+
+.product-controls {
+  margin-top: 1rem;
+  position: absolute;
+}
+
+.product-controls button {
+  background-color: #cfd0d126;
+  color: #959595;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  margin: 0 0.5rem;
+  font-weight: bold;
+}
+
+.product-controls button:hover {
+  background-color: #94979985;
+}
+
+.product-controls-previous {
+  margin-left: -50px !important;
+}
+
+.product-controls-next {
+  margin-right: -50px !important;
+}
+
+.nav-item {
+  transition: background-color 0.3s, color 0.3s; /* Thêm hiệu ứng chuyển đổi */
+}
+
+/* CSS cho liên kết được chọn */
+.nav-item.active {
+  background-color:  rgb(100 116 139); /* Màu nền khi được chọn */
+  color: #fff; /* Màu chữ khi được chọn */
+}
+
+.pagination {
+  text-align: right;
+}
+
+.pagination button {
+  width: 35px;
+  padding: 5px;
+  background-color: #ffffff;
+  color: #000000;
+  margin: 5px 1px;
+}
+
+.pagination-product {
+  text-align: right;
+}
+
+.pagination-product button {
+  width: 35px;
+  padding: 5px;
+  background-color: #8f8f8f;
+  color: #ffffff;
+  margin: 5px 1px;
+  border: 1px solid #8f8f8f;
+}
+
+.pagination-product button:hover {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+@media (max-width: 576px) {
+  .product-controls-previous {
+    margin-left: -20px !important;
+  }
+  .product-controls-next {
+    margin-right: -20px!important;
+  }
+}
+
+@media (min-width: 728px) and (max-width: 1024px) {
+  .product-controls-previous {
+    margin-left: -40px !important;
+  }
+  .product-controls-next {
+    margin-right: -40px!important;
+  }
+}
