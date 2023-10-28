@@ -1,49 +1,107 @@
 import { Link } from "react-router-dom";
 import Logo from "../../../asset/images/Logo.png";
-import iconCart from "../../../asset/images/bag.png";
-import iconUser from "../../../asset/images/user.png";
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
-
-function Header({ accountUser }) {
+import { useLayoutEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllCategories } from "../../../thunks/CategoryThunk";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCartArrowDown,
+  faCartShopping,
+  faGlobe,
+  faSignIn,
+  faUserAlt,
+} from "@fortawesome/free-solid-svg-icons";
+import { loadCart } from "../../../slices/CartSlice";
+function Header() {
   const [t, i18n] = useTranslation("app");
-  const [userLogin, setUserLogin] = useState(true);
+  const { newCollection } = useSelector((state) => state.productReducer);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { logged } = useSelector((state) => state.authReducer);
+  const { categories } = useSelector((state) => state.categoryReducer);
+  const dispatch = useDispatch();
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
-
+  useLayoutEffect(() => {
+    dispatch(getAllCategories());
+    dispatch(loadCart());
+  }, []);
   return (
-    <header className="fixed z-50 right-0 left-0 top-0 shadow-lg px-0 sm:px-4 py-2 bg-white">
+    <header className="fixed z-50 right-0 left-0 top-0 px-0 sm:px-4 py-2 lg:py-0 bg-white">
       <nav className="flex justify-between">
-        <div className="grid  xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-3 items-center gap-3 justify-between w-full">
+        <div className="grid mx-auto xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-3 items-center gap-3 justify-between lg:w-full">
           <div
             className={`navLinks duration-500 z-40 ${
               menuOpen
                 ? "lg:static lg:w-auto w-full absolute"
-                : "hidden  lg:block xl:block "
+                : "hidden lg:block xl:block "
             }  lg:h-auto bg-white flex md:items-center gap-[1.5vw] ${
               menuOpen ? "top-[100%] left-0" : "top-[-100%] left-[-100%]"
-            } lg:px-5 lg:py-0 py-5 px-5 `}
+            }  lg:px-0 py-5 xl:px-5 lg:col-span-1 lg:min-w-[380px] px-5   xl:w-full `}
           >
-            <ul className="flex lg:flex-row flex-col lg:items-center lg:gap-[2vw] gap-3">
-              <li className="relative max-w-fit pr-3 md:pr-0 py-1 after:bg-gradient-to-r from-[#2b68e0] to-[#e710ea]  after:absolute after:h-1 after:w-0 after:bottom-0 after:left-0 hover:after:w-full after:transition-all after:duration-300">
-                <Link to="/">{t("shop")}</Link>
+            <ul className="flex lg:flex-row flex-col lg:items-center lg:gap-[1vw] w-full lg:w-auto">
+              <li className="group inline-block">
+                <button className="outline-none focus:outline-none text-start py-1 bg-white rounded-sm flex items-center">
+                  <span className="hover:font-semibold flex-1">
+                    {t("shop")}
+                  </span>
+                </button>
+                <ul
+                  className="bg-white border rounded-sm transform z-10 scale-0 group-hover:scale-100 absolute transition duration-150 ease-in-out origin-top min-w-32"
+                  style={{ minWidth: "250px" }}
+                >
+                  {categories.map((category, index) => {
+                    if (category.isPrimary == true) {
+                      return (
+                        <li
+                          className="rounded-sm px-3 relative py-2 hover:bg-gray-100"
+                          key={index}
+                        >
+                          <button className="w-full text-left flex items-center outline-none focus:outline-none">
+                            <span className="pr-1 flex-1">{category.name}</span>
+                          </button>
+                          <ul
+                            className="bg-white border px-3 py-2 rounded-sm absolute top-0 right-0 transition duration-150 ease-in-out origin-top-left min-w-32"
+                            style={{ minWidth: "250px" }}
+                          >
+                            {category.categories.map((val, index) => {
+                              return (
+                                <li
+                                  className="px-3 py-1 hover:bg-gray-100"
+                                  key={index}
+                                >
+                                  <Link to={`/product?category=${val.id}`}>
+                                    {val.name}
+                                  </Link>
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        </li>
+                      );
+                    }
+                  })}
+                </ul>
               </li>
-              <li className="relative max-w-fit pr-3 md:pr-0 py-1 after:bg-gradient-to-r from-[#2b68e0] to-[#e710ea]  after:absolute after:h-1 after:w-0 after:bottom-0 after:left-0 hover:after:w-full after:transition-all after:duration-300">
-                <Link to="/product">{t("category")}</Link>
-              </li>
-              <li className="relative max-w-fit pr-3 md:pr-0 py-1 after:bg-gradient-to-r from-[#2b68e0] to-[#e710ea]  after:absolute after:h-1 after:w-0 after:bottom-0 after:left-0 hover:after:w-full after:transition-all after:duration-300">
+              {newCollection.length > 0 && (
+                <li className="relative max-w-fit pr-3 md:pr-0 py-1 hover:font-semibold">
+                  <a href="#new-collection">{t("New Collection")}</a>
+                </li>
+              )}
+              <li className="relative max-w-fit pr-3 md:pr-0 py-1 hover:font-semibold">
                 <Link to="">{t("about_us")}</Link>
               </li>
-              <li className="relative max-w-fit pr-3 md:pr-0 py-1 after:bg-gradient-to-r from-[#2b68e0] to-[#e710ea]  after:absolute after:h-1 after:w-0 after:bottom-0 after:left-0 hover:after:w-full after:transition-all after:duration-300">
+              <li className="relative max-w-fit pr-3 md:pr-0 py-1 hover:font-semibold">
                 <Link to="">{t("contact")}</Link>
               </li>
             </ul>
           </div>
-          <div className="w-[130px] md:w-[200px] flex items-center mx-auto">
-            <img src={Logo} alt="LOGO" srcSet="" />
+          <div className=" flex items-center mx-auto lg:items-left xl:items-center">
+            <Link to={"/"}>
+              <img src={Logo} alt="LOGO" srcSet="" />
+            </Link>
           </div>
 
           <div className="flex gap-0 justify-end sm:col-span-2 lg:col-span-1">
@@ -81,75 +139,72 @@ function Header({ accountUser }) {
                 />
               </div>
             </form>
-            {Object.keys(accountUser).length !== 0 ? (
-              <Link
-                to="/login"
-                type="button"
-                style={{ backgroundColor: "black" }}
-                className="font-medium text-white px-2 py-2 mx-0 rounded active:bg-black hover:bg-gray-500 text-sm sm:text-base my-auto"
-              >
-                {t("login")}
-              </Link>
-            ) : (
-              <>
+            <div className="flex justify-center items-center">
+              {!logged ? (
                 <Link
-                  to="/user-profile"
-                  type="button"
-                  className="inline-flex items-center px-2 text-sm font-medium text-gray-900 bg-white border-0 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
+                  to="/login"
+                  className="bg-black font-medium text-white px-2 w-8 sm:w-9 lg:w-9 xl:w-9 md:w-9 min-w-8 my-auto  text-center py-2 mx-0 rounded-full active:bg-black hover:bg-gray-500 text-xs sm:text-sm "
                 >
-                  <div className="w-8 h-8  rounded-full bg-black p-2">
-                    <img src={iconUser} alt="iconUser" />
-                  </div>
+                  <button>
+                    <FontAwesomeIcon icon={faSignIn} />
+                  </button>
                 </Link>
-                <Link
-                  to="/orders"
-                  className="inline-flex items-center px-2 text-sm font-medium text-gray-900  border-0 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700"
-                >
-                  <div className="w-8 h-8  rounded-full bg-black p-2">
-                    <img src={iconCart} alt="iconCart" />
-                  </div>
-                </Link>
-              </>
-            )}
+              ) : (
+                <>
+                  <Link
+                    to="/user-profile"
+                    className=" bg-white font-medium text-white px-2 w-8 sm:w-9 lg:w-9 xl:w-9 md:w-9 min-w-8 my-auto  text-center py-2 mx-2 rounded-full active:bg-black"
+                  >
+                    <FontAwesomeIcon
+                      icon={faUserAlt}
+                      className="text-black mx-auto"
+                    />
+                  </Link>
+                  <Link
+                    to="/orders"
+                    className="bg-white font-medium text-white px-2 w-8 sm:w-9 lg:w-9 xl:w-9 md:w-9 min-w-8 my-auto  text-center py-2  rounded-full active:bg-black"
+                  >
+                    <FontAwesomeIcon
+                      icon={faCartArrowDown}
+                      className="text-black mx-auto"
+                    />
+                  </Link>
+                  <Link to={"/payment"}>
+                    <button className=" ms-2 bg-white px-2 w-8 sm:w-9 lg:w-9 xl:w-9 md:w-9 min-w-8  text-center rounded-full my-auto h-8 md:h-9 text-xs sm:text-sm">
+                      <FontAwesomeIcon
+                        icon={faCartShopping}
+                        className="text-black"
+                      />
+                    </button>
+                  </Link>
+                </>
+              )}
 
-            <button onClick={toggleMenu} className="px-2 block lg:hidden">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-6 h-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+              <button
+                onClick={() => {
+                  i18n.changeLanguage(i18n.language === "en" ? "vi" : "en");
+                }}
+                className="mx-2 bg-white px-2 w-8 sm:w-9 lg:w-9 xl:w-9 md:w-9 min-w-8  text-center rounded-full my-auto h-8 md:h-9"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            </button>
-            <button
-              onClick={() => {
-                // hàm change lang
-                i18n.changeLanguage(i18n.language === "en" ? "vi" : "en");
-              }}
-              className="pl-3"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"
-                />
-              </svg>
-            </button>
+                <FontAwesomeIcon icon={faGlobe} className="text-black" />
+              </button>
+              <button onClick={toggleMenu} className="pe-2 block lg:hidden ">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-6 h-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </nav>

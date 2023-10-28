@@ -3,6 +3,7 @@ import iconEyeClose from "../../../asset/images/eye-closed.png";
 import iconEye from "../../../asset/images/eye.png";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { Layout } from "..";
 
 function ForgotPassword3() {
   const [t] = useTranslation("app");
@@ -16,13 +17,13 @@ function ForgotPassword3() {
     setIsPasswordConfirm((prevState) => !prevState);
   }
   return (
-    <div className="mt-10 pt-10 sm-pt-0">
+    <Layout>
+      <div className="mt-10 pt-10 sm-pt-0">
       <div className="grid xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-4 gap-2 mx-2 py-20">
         <div className="xl:col-start-3 md:col-start-2 lg:col-start-2 col-span-2 border p-5">
           <h2 className="text-3xl">{t("create_new_password")}</h2>
           <p className="text-base py-3">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry.
+            {t("subtitle_new_password")}
           </p>
           <form className="mt-4">
             <div className="mx-auto max-w-lg">
@@ -83,6 +84,7 @@ function ForgotPassword3() {
         </div>
       </div>
     </div>
+    </Layout>
   );
 }
 

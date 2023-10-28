@@ -4,8 +4,12 @@ import iconEye from "../../../asset/images/eye.png";
 import styled from "styled-components";
 import { account } from "../../../data";
 import validator from "validator";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { register } from "../../../thunks/AuthThunk";
+import { OTP_TYPE } from "../../../constants/enum";
+import { Layout } from "..";
 const ErrorText = styled.div`
   color: red;
   text-align: start;
@@ -13,7 +17,6 @@ const ErrorText = styled.div`
 function Register() {
   const [t] = useTranslation("app");
 
-  const [accounts, setAccount] = useState(account);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isPasswordConfirm, setIsPasswordConfirm] = useState(false);
   const [name, setName] = useState("");
@@ -21,13 +24,16 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const dispatch = useDispatch();
+
   function togglePasswordVisibility() {
     setIsPasswordVisible((prevState) => !prevState);
   }
   function togglePasswordConfirm() {
     setIsPasswordConfirm((prevState) => !prevState);
   }
-  const [error, setError] = useState({
+  const nav = useNavigate();
+  const initError = {
     isErrorUserName: false,
     isErrorPassword: false,
     isErrorEmail: false,
@@ -35,27 +41,16 @@ function Register() {
     messageErrorUserName: "",
     messageErrorEmail: "",
     messageErrorPassword: "",
-  });
+  };
+  const [error, setError] = useState(initError);
   const onClickRegister = () => {
-    var id = 1;
-    accounts.map(() => {
-      return (id += 1);
-    });
-    const emailExists = accounts.filter((item) => item.email === email);
-    const usernameExists = accounts.filter((item) => item.email === email);
-    if (emailExists.length > 0) {
-      alert("email đăng kí đã tồn tại");
-    }
-    if (usernameExists.length > 0) {
-      alert("tên đăng nhập đã được sử dụng");
-    }
     if (name.length === 0) {
       return setError(
         (pre) =>
           (pre = {
             ...pre,
             isErrorUserName: true,
-            messageErrorUserName: "Không được bỏ trống",
+            messageErrorUserName: t("not_empty"),
           })
       );
     }
@@ -65,7 +60,7 @@ function Register() {
           (pre = {
             ...pre,
             isErrorEmail: true,
-            messageErrorEmail: "Không được bỏ trống",
+            messageErrorEmail: t("not_empty"),
           })
       );
     }
@@ -75,7 +70,7 @@ function Register() {
           (pre = {
             ...pre,
             isErrorPassword: true,
-            messageErrorPassword: "Không được bỏ trống",
+            messageErrorPassword: t("not_empty"),
           })
       );
     }
@@ -85,7 +80,7 @@ function Register() {
           (pre = {
             ...pre,
             isErrorPassword: true,
-            messageErrorPassword: "Mật khẩu phải giống nhau",
+            messageErrorPassword: t("same_password"),
           })
       );
     }
@@ -96,33 +91,26 @@ function Register() {
           (pre = {
             ...pre,
             isErrorEmail: true,
-            messageErrorEmail: "Email đang bị lỗi nè bạn ơi",
+            messageErrorEmail: t("notify_format_email"),
           })
       );
     }
-    if (error.isErrorPassword === false && error.isErrorEmail === false) {
-      setAccount([
-        ...account,
-        {
-          id,
-          name,
-          email,
-          password,
-        },
-      ]);
-    }
-
-    console.log(accounts);
+    setError(initError);
+    dispatch(register({ name, email, password })).then((resp) => {
+      if (!resp?.error) {
+        nav(`/forgot-OTP/${email}/${OTP_TYPE.VERIFY_ACCOUNT}`);
+      }
+    });
   };
 
   return (
-    <div className="mt-10 pt-10 sm-pt-0">
+    <Layout>
+      <div className="mt-10 pt-10 sm-pt-0">
       <div className="grid xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-4  gap-2 mx-2 py-20">
         <div className="xl:col-start-3 md:col-start-2 lg:col-start-2 col-span-2 border p-5">
           <h2 className="text-3xl">{t("register")}</h2>
           <p className="text-base py-3">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry.
+          {t('subtitle_register')}
           </p>
           <form className="mt-4">
             <div className="mx-auto max-w-lg">
@@ -228,6 +216,7 @@ function Register() {
         </div>
       </div>
     </div>
+    </Layout>
   );
 }
 

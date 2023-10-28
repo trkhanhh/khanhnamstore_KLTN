@@ -1,52 +1,65 @@
 import { useState } from "react";
 import iconEyeClose from "../../../asset/images/eye-closed.png";
 import iconEye from "../../../asset/images/eye.png";
-import { account } from "../../../data";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-
-function Login({ setAccountUser }) {
+import { useSelector, useDispatch } from "react-redux";
+import { login } from "../../../thunks/AuthThunk";
+import { setAlert } from "../../../slices/AlertSlice";
+import { Layout } from "..";
+function Login() {
   const [t] = useTranslation("app");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [accounts, setAccount] = useState(account);
+  const { logged } = useSelector((state) => state.authReducer);
 
   function togglePasswordVisibility() {
     setIsPasswordVisible((prevState) => !prevState);
   }
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loggedIn, setLoggedIn] = useState(false);
+  const dispatch = useDispatch();
+  const nav = useNavigate();
 
   const handleLogin = () => {
-    const foundAccount = accounts.find(
-      (item) => item.email === email && item.password === password
-    );
-
-    if (foundAccount) {
-      setAccountUser(foundAccount);
-      setLoggedIn(true);
-    } else {
-      alert(
-        "Đăng nhập không thành công. Vui lòng kiểm tra lại tài khoản và mật khẩu."
-      );
+    if (validate()) {
+      dispatch(login({ username: email, password })).then((resp) => {
+        if (!resp?.error) {
+          nav("/");
+        }
+      });
     }
   };
+  const validate = () => {
+    if (password === "") {
+      dispatch(
+        setAlert({ type: t("error"), content: "Mật khẩu không được để trống" })
+      );
+      return false;
+    }
+    if (email === "") {
+      dispatch(
+        setAlert({ type: t("error"), content: t("notify_valid_email") })
+      );
+      return false;
+    }
+    return true;
+  };
   return (
-    <div className="mt-10 pt-10 sm-pt-0">
+   <Layout>
+     <div className="mt-10 pt-10 sm-pt-0">
       <div className="grid xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-4 gap-2 mx-2 py-20">
-        {loggedIn ? <></> : <></>}
+        {logged ? <></> : <></>}
         <div className="xl:col-start-3 md:col-start-2 lg:col-start-2 col-span-2 border p-5">
           <h2 className="text-3xl">{t("login")}</h2>
           <p className="text-base py-3">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry.
+            {t('subtitle_login')}
           </p>
           <form className="mt-4">
             <div className="mx-auto max-w-lg">
               <div className="py-2">
                 <span className="px-1 text-sm text-gray-600">Email</span>
                 <input
+                  required
                   placeholder={t("enter_email")}
                   type="text"
                   value={email}
@@ -59,6 +72,7 @@ function Login({ setAccountUser }) {
                   {t("password")}
                 </span>
                 <input
+                  required
                   type={isPasswordVisible ? "text" : "password"}
                   placeholder={t("enter_password")}
                   value={password}
@@ -101,6 +115,7 @@ function Login({ setAccountUser }) {
         </div>
       </div>
     </div>
+   </Layout>
   );
 }
 
