@@ -23,13 +23,13 @@ function NavAdmin() {
         </div>
         <nav className="text-white text-base font-semibold pt-3">
           <Link
-            to="/admin"
-            onClick={() => handleLinkClick("/admin")} // Gọi hàm khi người dùng nhấp vào liên kết
+            to="/admin/category-manager"
+            onClick={() => handleLinkClick("/admin/product-manager")} // Gọi hàm khi người dùng nhấp vào liên kết
             className={`flex items-center text-white py-4 pl-6 nav-item px-3 ${
-              activeLink === "/admin" ? "active" : "" // Áp dụng lớp "active" nếu liên kết được chọn
+              activeLink === "/admin/product-manager" ? "active" : "" // Áp dụng lớp "active" nếu liên kết được chọn
             }`}
           >
-            Dashboard
+            {t("Category Manager")}
           </Link>
           <Link
             to="/admin/product-manager"

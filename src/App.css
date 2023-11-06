@@ -1,5 +1,7 @@
 @tailwind base;
-
+.ck{
+  color: black;
+}
 .poster-info {
     position: absolute;
     top: 30%;

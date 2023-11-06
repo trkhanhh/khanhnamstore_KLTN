@@ -29,7 +29,7 @@ function UserProfile({ setAccountUser }) {
       if (userUpdate.phone.toLowerCase().length !== 10) {
         dispatch(
           setAlert({
-            type: ' t("error")',
+            type: t("error"),
             content: t("notify_format_phone"),
           })
         );

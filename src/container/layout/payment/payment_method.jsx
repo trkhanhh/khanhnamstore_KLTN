@@ -39,7 +39,7 @@ function PaymentMethod() {
   }, [products]);
   const handlePay = () => {
     if (payType === "") {
-      dispatch(setAlert({ type: "error", content: "select a pay type" }));
+      dispatch(setAlert({ type: t("error"), content: t("select_type_pay") }));
     }
     if (payType === "PAYMENT_MOMO") {
       dispatch(
@@ -113,43 +113,43 @@ function PaymentMethod() {
               {t("payment_methods")}
             </Link>
           </div>
-          <div className="mt-4 my-4">
-            <div className="grid grid-cols-2 gap-2  mx-auto">
+          <div className="mt-4 my-4 pb-5">
+            <div className="grid grid-cols-2 gap-2  mx-auto ">
               <div className="mx-auto sm:col-span-1 col-span-2 w-full px-3 border border-black my-2">
                 <h2 className="text-lg md:text-2xl py-3">
                   {t("receiving_information")}
                 </h2>
                 <div className="py-2">
-                  <span className="px-0 text-sm text-gray-600">
+                  <label className="px-0 text-base text-gray-600">
                     {t("your_name")}
-                  </span>
+                  </label>
                   <input
                     defaultValue={user.fullname}
                     placeholder={t("enter_your_name")}
                     type="text"
-                    className="w-full px-2 py-2 text-sm sm:text-base border border-gray-700 rounded outline-none  focus:ring-blue-500 focus:border-blue-500 focus:ring-1"
+                    className="w-full px-2 py-2 text-sm  border border-gray-700 rounded outline-none  focus:ring-blue-500 focus:border-blue-500 focus:ring-1"
                   />
                 </div>
                 <div className="py-2">
-                  <span className="px-0 text-sm text-gray-600">
+                  <label className="px-0 text-base text-gray-600">
                     {t("phone")}
-                  </span>
+                  </label>
                   <input
                     defaultValue={user.phone}
                     placeholder={t("enter_phone")}
                     type="text"
-                    className="w-full px-2 py-2 text-sm sm:text-base  border border-gray-700 rounded outline-none  focus:ring-blue-500 focus:border-blue-500 focus:ring-1"
+                    className="w-full px-2 py-2 text-sm   border border-gray-700 rounded outline-none  focus:ring-blue-500 focus:border-blue-500 focus:ring-1"
                   />
                 </div>
                 <div className="py-2">
-                  <span className="px-0 text-sm text-gray-600">
+                  <label className="px-0 text-base text-gray-600">
                     {t("address")}
-                  </span>
+                  </label>
                   <select
                     onChange={(e) => {
                       setAddress(e.target.value);
                     }}
-                    className="w-full px-2 py-2 text-sm sm:text-base  border border-gray-700 rounded outline-none  focus:ring-blue-500 focus:border-blue-500 focus:ring-1"
+                    className="w-full px-2 py-2 text-sm   border border-gray-700 rounded outline-none  focus:ring-blue-500 focus:border-blue-500 focus:ring-1"
                   >
                     {addresses.map((address, index) => {
                       return (
@@ -167,13 +167,13 @@ function PaymentMethod() {
                   </select>
                 </div>
                 <div className="py-2">
-                  <span className="px-0 text-sm text-gray-600">
+                  <label className="px-0 text-base text-gray-600">
                     {t("note")}
-                  </span>
-                  <input
+                  </label>
+                  <textarea
                     placeholder={t("enter_note")}
                     type="text"
-                    className="w-full px-2 py-2 ttext-sm sm:text-base  border border-gray-700 rounded outline-none  focus:ring-blue-500 focus:border-blue-500 focus:ring-1"
+                    className="w-full px-2 py-2 text-sm  border border-gray-700 rounded outline-none  focus:ring-blue-500 focus:border-blue-500 focus:ring-1"
                   />
                 </div>
               </div>

@@ -146,7 +146,7 @@ function Product() {
             ))}
             {products.length == 0 && (
               <div className="flex w-full">
-                <p className="text-center">Không có sản phẩm nào</p>
+                <p className="text-center">{t("empty_product")}</p>
               </div>
             )}
           </div>

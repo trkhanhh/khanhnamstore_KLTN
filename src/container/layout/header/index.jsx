@@ -153,27 +153,27 @@ function Header() {
                 <>
                   <Link
                     to="/user-profile"
-                    className=" bg-white font-medium text-white px-2 w-8 sm:w-9 lg:w-9 xl:w-9 md:w-9 min-w-8 my-auto  text-center py-2 mx-2 rounded-full active:bg-black"
+                    className=" bg-white font-medium text-white px-2 w-8 sm:w-9 lg:w-9 xl:w-9 md:w-9 min-w-8 my-auto  text-center py-2 mx-2 rounded-full"
                   >
                     <FontAwesomeIcon
                       icon={faUserAlt}
-                      className="text-black mx-auto"
+                      className="text-black mx-auto text-xl"
                     />
                   </Link>
                   <Link
                     to="/orders"
-                    className="bg-white font-medium text-white px-2 w-8 sm:w-9 lg:w-9 xl:w-9 md:w-9 min-w-8 my-auto  text-center py-2  rounded-full active:bg-black"
+                    className="bg-white font-medium text-white px-2 w-8 sm:w-9 lg:w-9 xl:w-9 md:w-9 min-w-8 my-auto  text-center py-2  rounded-full"
                   >
                     <FontAwesomeIcon
                       icon={faCartArrowDown}
-                      className="text-black mx-auto"
+                      className="text-black mx-auto text-xl"
                     />
                   </Link>
                   <Link to={"/payment"}>
                     <button className=" ms-2 bg-white px-2 w-8 sm:w-9 lg:w-9 xl:w-9 md:w-9 min-w-8  text-center rounded-full my-auto h-8 md:h-9 text-xs sm:text-sm">
                       <FontAwesomeIcon
                         icon={faCartShopping}
-                        className="text-black"
+                        className="text-black text-xl"
                       />
                     </button>
                   </Link>
@@ -186,7 +186,10 @@ function Header() {
                 }}
                 className="mx-2 bg-white px-2 w-8 sm:w-9 lg:w-9 xl:w-9 md:w-9 min-w-8  text-center rounded-full my-auto h-8 md:h-9"
               >
-                <FontAwesomeIcon icon={faGlobe} className="text-black" />
+                <FontAwesomeIcon
+                  icon={faGlobe}
+                  className="text-black text-xl"
+                />
               </button>
               <button onClick={toggleMenu} className="pe-2 block lg:hidden ">
                 <svg

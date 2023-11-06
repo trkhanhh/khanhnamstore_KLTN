@@ -32,7 +32,7 @@ function Login() {
   const validate = () => {
     if (password === "") {
       dispatch(
-        setAlert({ type: t("error"), content: "Mật khẩu không được để trống" })
+        setAlert({ type: t("error"), content: t("empty_password") })
       );
       return false;
     }
@@ -57,18 +57,18 @@ function Login() {
           <form className="mt-4">
             <div className="mx-auto max-w-lg">
               <div className="py-2">
-                <span className="px-1 text-sm text-gray-600">Email</span>
+                <span className="px-1 text-base text-gray-600">Email</span>
                 <input
                   required
                   placeholder={t("enter_email")}
                   type="text"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-2  text-base  border border-gray-300 rounded outline-none  focus:ring-blue-500 focus:border-blue-500 focus:ring-1"
+                  className="w-full px-4 py-2  text-sm  border border-gray-300 rounded outline-none  focus:ring-blue-500 focus:border-blue-500 focus:ring-1"
                 />
               </div>
               <div className="py-2 relative">
-                <span className="px-1 text-sm text-gray-600">
+                <span className="px-1 text-base text-gray-600">
                   {t("password")}
                 </span>
                 <input
@@ -77,7 +77,7 @@ function Login() {
                   placeholder={t("enter_password")}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-4 py-2  text-base  border border-gray-300 rounded outline-none  focus:ring-blue-500 focus:border-blue-500 focus:ring-1"
+                  className="w-full px-4 py-2  text-sm  border border-gray-300 rounded outline-none  focus:ring-blue-500 focus:border-blue-500 focus:ring-1"
                 />
                 <button
                   className="absolute inset-y-0 right-0 flex items-center px-4 mt-6 text-gray-600"
@@ -91,7 +91,7 @@ function Login() {
                   )}
                 </button>
               </div>
-              <div className="text-end">
+              <div className="text-end text-sm">
                 <Link to="/forgot" className="underline">
                   {t("forgot_password")}?
                 </Link>

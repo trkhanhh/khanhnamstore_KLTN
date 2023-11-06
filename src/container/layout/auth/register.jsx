@@ -115,15 +115,15 @@ function Register() {
           <form className="mt-4">
             <div className="mx-auto max-w-lg">
               <div className="py-2">
-                <span className="px-1 text-sm text-gray-600">
+                <label className="px-1 text-base text-gray-600">
                   {t("your_name")}
-                </span>
+                </label>
                 <input
                   placeholder={t("enter_your_name")}
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full px-4 py-2  text-base  border border-gray-300 rounded outline-none  focus:ring-blue-500 focus:border-blue-500 focus:ring-1"
+                  className="w-full px-4 py-2  text-sm  border border-gray-300 rounded outline-none  focus:ring-blue-500 focus:border-blue-500 focus:ring-1"
                 />
                 {error.isErrorUserName && (
                   <ErrorText className="form-text danger">
@@ -132,13 +132,13 @@ function Register() {
                 )}
               </div>
               <div className="py-2">
-                <span className="px-1 text-sm text-gray-600">Email</span>
+                <lab4 className="px-1 text-base text-gray-600">Email</lab4>
                 <input
                   placeholder={t("enter_email")}
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-2  text-base  border border-gray-300 rounded outline-none  focus:ring-blue-500 focus:border-blue-500 focus:ring-1"
+                  className="w-full px-4 py-2  text-sm  border border-gray-300 rounded outline-none  focus:ring-blue-500 focus:border-blue-500 focus:ring-1"
                 />
                 {error.isErrorEmail && (
                   <ErrorText className="form-text danger">
@@ -147,15 +147,15 @@ function Register() {
                 )}
               </div>
               <div className="py-2 relative">
-                <span className="px-1 text-sm text-gray-600">
+                <label className="px-1 text-base text-gray-600">
                   {t("password")}
-                </span>
+                </label>
                 <input
                   type={isPasswordVisible ? "text" : "password"}
                   placeholder={t("enter_password")}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-4 py-2  text-base  border border-gray-300 rounded outline-none  focus:ring-blue-500 focus:border-blue-500 focus:ring-1"
+                  className="w-full px-4 py-2  text-sm  border border-gray-300 rounded outline-none  focus:ring-blue-500 focus:border-blue-500 focus:ring-1"
                 />
                 {error.isErrorPassword && (
                   <ErrorText className="form-text danger">
@@ -175,15 +175,15 @@ function Register() {
                 </button>
               </div>
               <div className="py-2 relative">
-                <span className="px-1 text-sm text-gray-600">
+                <label className="px-1 text-base text-gray-600">
                   {t("confirm_password")}
-                </span>
+                </label>
                 <input
                   type={isPasswordConfirm ? "text" : "password"}
                   placeholder={t("enter_confirm_password")}
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="w-full px-4 py-2  text-base  border border-gray-300 rounded outline-none  focus:ring-blue-500 focus:border-blue-500 focus:ring-1"
+                  className="w-full px-4 py-2  text-sm  border border-gray-300 rounded outline-none  focus:ring-blue-500 focus:border-blue-500 focus:ring-1"
                 />
                 <button
                   className="absolute inset-y-0 right-0 flex items-center px-4 mt-6 text-gray-600"

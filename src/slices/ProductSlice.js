@@ -9,12 +9,30 @@ const initState = {
   relatedProduct: [],
   newProduct: [],
   newCollection: [],
-  productComment:[]
+  productComment: [],
+  adminSearch: [],
+  manager: {
+    products: [],
+    colors: [],
+    productUpdate: {},
+  },
 };
 const ProductSlice = createSlice({
   name: "products",
   initialState: initState,
   reducers: {
+    setProductUpdate: (state, { payload }) => {
+      state.manager.productUpdate = payload;
+    },
+    setProductColorManager: (state, { payload }) => {
+      state.manager.colors = payload;
+    },
+    setProductManager: (state, { payload }) => {
+      state.manager.products = payload;
+    },
+    setAdminSearch: (state, { payload }) => {
+      state.adminSearch = payload;
+    },
     setProducts: (state, { payload }) => {
       state.products = payload;
     },
@@ -39,14 +57,15 @@ const ProductSlice = createSlice({
     setNewCollection: (state, { payload }) => {
       state.newCollection = payload;
     },
-    setProductComment:(state,{payload})=>{
+    setProductComment: (state, { payload }) => {
       state.productComment = payload;
-    }
+    },
   },
 });
 
 export const {
   setProducts,
+  setProductColorManager,
   setTotalPage,
   setPage,
   setSingleProduct,
@@ -54,7 +73,10 @@ export const {
   setRelatedProduct,
   setNewProduct,
   setNewCollection,
-  setProductComment
+  setProductComment,
+  setProductManager,
+  setAdminSearch,
+  setProductUpdate,
 } = ProductSlice.actions;
 
 export default ProductSlice.reducer;

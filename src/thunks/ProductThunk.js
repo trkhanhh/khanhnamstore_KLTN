@@ -4,7 +4,10 @@ import {
   setNewCollection,
   setNewProduct,
   setPage,
+  setProductColorManager,
   setProductComment,
+  setProductManager,
+  setProductUpdate,
   setProducts,
   setRelatedProduct,
   setSingleProduct,
@@ -57,6 +60,27 @@ export const getProductById = createAsyncThunk(
       if (resp.status >= 200 && resp.status < 300) {
         const jsonData = await resp.json();
         dispatch(setSingleProduct(jsonData));
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
+);
+export const getProductUpdateById = createAsyncThunk(
+  "/product/id",
+  async (id, { dispatch, rejectWithValue }) => {
+    try {
+      let uri = `${API.uri}/product/public/findById?id=${id}`;
+
+      const resp = await fetch(uri, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (resp.status >= 200 && resp.status < 300) {
+        const jsonData = await resp.json();
+        dispatch(setProductUpdate(jsonData));
       }
     } catch (e) {
       console.log(e);
@@ -204,6 +228,139 @@ export const sendFeedBack = createAsyncThunk(
       dispatch(setAlert({ type: "success", content: "Send feedback success" }));
     } catch (e) {
       console.log(e);
+    }
+  }
+);
+
+export const addProduct = createAsyncThunk(
+  "/product/add",
+  async (data, { dispatch, rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("auth_token");
+      const resp = await fetch(`${API.uri}/product/admin/create`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+      });
+      if (resp.status >= 200 && resp.status < 300) {
+        dispatch(
+          setAlert({ type: "success", content: "Create new product success" })
+        );
+        dispatch(getAllProductList());
+      } else {
+        dispatch(
+          setAlert({ type: "error", content: resp.json()?.defaultMessage })
+        );
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
+);
+export const updateProduct = createAsyncThunk(
+  "/product/update",
+  async (data, { dispatch, rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("auth_token");
+      const resp = await fetch(`${API.uri}/product/admin/update`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+      });
+      if (resp.status >= 200 && resp.status < 300) {
+        dispatch(
+          setAlert({ type: "success", content: "Update product success" })
+        );
+        dispatch(getAllProductList());
+        dispatch(getNewCollection());
+        dispatch(getNewProduct());
+      } else {
+        dispatch(
+          setAlert({
+            type: "error",
+            content: resp.json()?.defaultMessage ?? "Update product error ",
+          })
+        );
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
+);
+
+export const getAllProductList = createAsyncThunk(
+  "/product/list",
+  async (_, { dispatch, rejectWithValue }) => {
+    try {
+      const resp = await fetch(`${API.uri}/product/public/findAll-list`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (resp.status >= 200 && resp.status < 300) {
+        const data = await resp.json();
+        dispatch(setProductManager(data));
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
+);
+
+export const getAllProductColorList = createAsyncThunk(
+  "/product/list",
+  async (_, { dispatch, rejectWithValue }) => {
+    try {
+      const resp = await fetch(`${API.uri}/product-color/admin/list`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (resp.status >= 200 && resp.status < 300) {
+        const data = await resp.json();
+        dispatch(setProductColorManager(data));
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  }
+);
+
+export const deleteProduct = createAsyncThunk(
+  "admin/product/de;ete",
+  async (id, { dispatch, rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("auth_token");
+      const resp = await fetch(`${API.uri}/product/admin/delete?id=${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (resp.status < 200 || resp.status >= 400) {
+        dispatch(
+          setAlert({
+            type: "error",
+            content: resp.json()?.defaultMessage ?? "Error when delete product",
+          })
+        );
+        return rejectWithValue();
+      }
+      dispatch(setAlert({ type: "success", content: "Success" }));
+      dispatch(getAllProductList());
+    } catch (e) {
+      dispatch(
+        setAlert({ type: "error", content: "Error when delete product" })
+      );
     }
   }
 );

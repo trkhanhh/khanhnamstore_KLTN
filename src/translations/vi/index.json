@@ -142,7 +142,21 @@
     "not_empty": "Không được bỏ trống",
     "notify_valid_email": "Email không được bỏ trống",
     "same_password": "Mật khẩu phải giống nhau",
-    "subtitle_home": "chào mừng bạn đã đến với cửa hàng của chúng tôi. Chúc bạn có những trải nghệm thật vui vẻ",
+    "subtitle_home": "Chào mừng bạn đã đến với cửa hàng của chúng tôi. Chúc bạn có những trải nghệm thật vui vẻ",
     "subtitle_slide_home" : "XUẤT NHẬP KHẨU DỆT MAY - TỒN KHO, MẪU DỆT BỘ SƯU TẬP, THÊM CÁC THƯƠNG HIỆU THỜI TRANG NỔI TIẾNG",
-    "empty_cart": "Hiện tại giỏ hàng của bạn đang trống, hãy tiếp tục mua sắm nhé"
+    "empty_cart": "Hiện tại giỏ hàng của bạn đang trống, hãy tiếp tục mua sắm nhé",
+    "result_search": "Kết quả tìm kiếm",
+    "empty_address": "Bạn chưa có địa chỉ nào, hãy thêm địa chỉ để có thể dễ dàng mua hàng",
+    "empty_result_search": "Không có tìm được sản phẩm bạn muốn",
+    "empty_product": "Không có sản phẩm nào",
+    "empty_street": "Tên đường không được bỏ trống",
+    "confirm_delete": "Bạn có muốn xóa ?",
+    "success": "Thành công",
+    "notify_add_cart":"Đã thêm vào giỏ hàng",
+    "select_size": "Chọn kích cỡ",
+    "need_login": "Cần đăng nhập",
+    "please_rate": "Hãy đánh giá ít nhất 1 sao",
+    "let_evaluate": "Hãy đánh giá gì đó",
+    "select_type_pay": "Hãy chọn phương thức thành toán",
+    "empty_password": "Mật khẩu không được để trống"
 }

@@ -3,55 +3,64 @@ import HeaderAdmin from "../component/header";
 import { useTranslation } from "react-i18next";
 import Pagination from "../component/pagination";
 import { useEffect, useLayoutEffect, useState } from "react";
-import { PAGINATION } from "../../../contanst";
 import HomeAdmin from "..";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUser, lockOrUnLockUser } from "../../../thunks/UserThunk";
 import { setSearch } from "../../../slices/UserSlice";
+import {
+  deleteCategory,
+  getAllCategories,
+} from "../../../thunks/CategoryThunk";
 
-function UserManager() {
+function CategoryManager() {
   const [t] = useTranslation("app");
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState();
   const [query, setQuery] = useState("");
-  const { users, search } = useSelector((state) => state.userReducer);
+  const [search, setSearch] = useState([]);
+  const { categories } = useSelector((state) => state.categoryReducer);
   useLayoutEffect(() => {
-    dispatch(getAllUser());
+    if (categories.length == 0) {
+      dispatch(getAllCategories());
+    }
   }, []);
   useLayoutEffect(() => {
-    dispatch(setSearch(users));
-    setTotalPage(Math.ceil(users.length / 10));
-  }, [users]);
+    setSearch(categories);
+    setTotalPage(Math.ceil(categories.length / 10));
+  }, [categories]);
   useLayoutEffect(() => {
     setTotalPage(Math.ceil(search.length / 10));
   }, [search]);
-  const handleLockOrUnLockUser = (id) => {
-    dispatch(lockOrUnLockUser(id));
-  };
+
   useLayoutEffect(() => {
-    let users_search = [];
-    for (let user of users) {
-      if (user?.username?.includes(query) || user?.fullname?.includes(query)) {
-        users_search.push(user);
+    let cat_search = [];
+    for (let cat of categories) {
+      if (cat.name.includes(query) || cat.id == query) {
+        cat_search.push(cat);
       }
     }
     if (query == "") {
-      users_search = [...users];
+      cat_search = [...categories];
     }
-    dispatch(setSearch(users_search));
+    setSearch(cat_search);
   }, [query]);
 
+  const handleDelete = (id) => {
+    if (window.confirm("Do u want delete?")) {
+      dispatch(deleteCategory(id));
+    }
+  };
   return (
     <HomeAdmin>
       <div className="w-10/12 bg-slate-700 text-white h-screen  flex flex-col overflow-y-hidden ">
         <HeaderAdmin />
         <div className="w-full overflow-x-hidden">
           <main className="w-full flex-grow p-6">
-            <h1 className="text-3xl  pb-6">{t("user_manager")}</h1>
+            <h1 className="text-3xl  pb-6">{t("Category Manager")}</h1>
             <div className="flex justify-between">
               <Link
-                to="/admin/user-create"
+                to="/admin/category-create"
                 className="border border-sky-600 text-white uppercase py-2 text-base px-10 bg-sky-600 rounded-full mt-3"
               >
                 {t("add")}
@@ -106,10 +115,10 @@ function UserManager() {
                         STT
                       </th>
                       <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
-                        {t("your_name")}
+                        {t("Category Name")}
                       </th>
                       <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
-                        Email
+                        Image
                       </th>
                       <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
                         {t("operate")}
@@ -119,26 +128,40 @@ function UserManager() {
                   <tbody>
                     {search
                       .slice((page - 1) * 10, page * 10)
-                      .map((user, index) => {
+                      .map((cat, index) => {
                         return (
                           <tr key={index} className="hover:bg-grey-lighter">
                             <td className="py-4 px-6 border-b border-grey-light">
-                              {user.id}
+                              {cat.id}
                             </td>
                             <td className="py-4 px-6 border-b border-grey-light">
-                              {user.fullname}
+                              {cat.name}
                             </td>
                             <td className="py-4 px-6 border-b border-grey-light">
-                              {user.email}
+                              <img
+                                src={cat.imageBanner}
+                                style={{
+                                  maxWidth: "64px",
+                                  maxHeight: "64px",
+                                  borderRadius: 4,
+                                  objectFit: "cover",
+                                }}
+                              />
                             </td>
                             <td className="py-4 px-6 border-b border-grey-light">
+                              <Link
+                                to={`/admin/category-edit/${cat.id}`}
+                                className="border border-yellow-400 text-white uppercase py-2 px-3 bg-yellow-400 rounded-lg mt-3 mx-1 text-xs"
+                              >
+                                Edit
+                              </Link>
                               <button
                                 onClick={() => {
-                                  handleLockOrUnLockUser(user.id);
+                                  handleDelete(cat.id);
                                 }}
                                 className="border border-rose-600 text-white uppercase py-2 px-3 bg-rose-600 rounded-lg mt-3 mx-1 text-xs"
                               >
-                                {user?.actived ? "Lock" : "UnLocked"}
+                                DELETE
                               </button>
                             </td>
                           </tr>
@@ -161,4 +184,4 @@ function UserManager() {
   );
 }
 
-export default UserManager;
+export default CategoryManager;

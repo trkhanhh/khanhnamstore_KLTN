@@ -4,7 +4,6 @@ import poster from "../../asset/images/slide.png";
 import cloth from "../../asset/images/cloth_1.png";
 import cloth_1 from "../../asset/images/cloth_1.png";
 import cloth_2 from "../../asset/images/cloth_2.png";
-import avatar_default from "../../asset/images/default_avatar.jpg";
 import logoipsum from "../../asset/images/logoipsum.png";
 import logoipsum_1 from "../../asset/images/logoipsum_1.png";
 import logoipsum_2 from "../../asset/images/logoipsum_2.png";
@@ -37,7 +36,7 @@ function HomePage() {
   }, []);
   const handleSendFeedBack = () => {
     if (email.trim() == "") {
-      dispatch(setAlert({ type: "error", content: "Email dont empty" }));
+      dispatch(setAlert({ type: t("error"), content: t("notify_valid_email") }));
       return;
     }
     dispatch(sendFeedBack());
@@ -95,7 +94,7 @@ function HomePage() {
           </div>
 
           <div className="new_product py-8">
-            <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl pt-20 text-center font-bold uppercase">
+            <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl pt-20 pb-2 text-center font-bold uppercase">
               {t("new_product")}
             </h2>
             <div className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-3">

@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 function Pagination({ totalPage, setPage }) {
-    const arrPage = [];
+  const arrPage = [];
   for (let i = 1; i <= totalPage; i++) {
     arrPage.push(i);
   }
@@ -17,7 +17,6 @@ function Pagination({ totalPage, setPage }) {
         </button>
       ))}
       <button>&raquo;</button>
-
     </div>
   );
 }

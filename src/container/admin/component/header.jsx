@@ -3,8 +3,8 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 function HeaderAdmin() {
+  const [t, i18n] = useTranslation("app");
   const [isOpen, setIsOpen] = useState(true);
-  const [i18n] = useTranslation("app");
   return (
     <div className="w-full bg-slate-800 text-black px-6 left-0 top-0 ">
       <div className="flex items-end text-right justify-end md:order-2 relative py-2">
@@ -28,8 +28,7 @@ function HeaderAdmin() {
           <ul className="py-2" aria-labelledby="user-menu-button">
             <li>
               <button
-                onClick={() => {
-                  // hàm change lang
+                 onClick={() => {
                   i18n.changeLanguage(i18n.language === "en" ? "vi" : "en");
                 }}
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 "

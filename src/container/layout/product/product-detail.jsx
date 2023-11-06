@@ -51,12 +51,12 @@ function ProductDetail() {
   const handComment = () => {
     if (rating <= 0) {
       dispatch(
-        setAlert({ type: "error", content: "Hãy đánh giá ít nhất 1 sao" })
+        setAlert({ type: t("error"), content: t('please_rate') })
       );
       return;
     }
     if (comment.trim() === "") {
-      dispatch(setAlert({ type: "error", content: "Hãy đánh giá gì đó" }));
+      dispatch(setAlert({ type: t("error"), content: t("let_evaluate") }));
       return;
     }
     const data = { star: rating, content: comment, product: { id: id } };
@@ -85,11 +85,11 @@ function ProductDetail() {
 
   const handleBuyNow = () => {
     if (!selectedSize) {
-      dispatch(setAlert({ type: "error", content: "Select a size" }));
+      dispatch(setAlert({ type: t("error"), content: ("select_size") }));
       return;
     }
     if (Object.keys(user).length === 0) {
-      dispatch(setAlert({ type: "error", content: "Need login" }));
+      dispatch(setAlert({ type: t("error"), content: t("need_login") }));
       return;
     }
     const product_add = {
@@ -103,11 +103,11 @@ function ProductDetail() {
   };
   const handleAddToCart = () => {
     if (!selectedSize) {
-      dispatch(setAlert({ type: "error", content: "Select a size" }));
+      dispatch(setAlert({ type: t("error"), content: t("select_size") }));
       return;
     }
     if (Object.keys(user).length === 0) {
-      dispatch(setAlert({ type: "error", content: "Need login" }));
+      dispatch(setAlert({ type: t("error"), content: t("need_login") }));
       return;
     }
     const product_add = {
@@ -117,7 +117,7 @@ function ProductDetail() {
       quantity: quantity,
     };
     dispatch(addProduct(product_add));
-    dispatch(setAlert({ type: "success", content: "Added to cart" }));
+    dispatch(setAlert({ type: t("success"), content: t("notify_add_cart") }));
   };
 
   return (

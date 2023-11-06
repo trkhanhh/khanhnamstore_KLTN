@@ -144,5 +144,19 @@
     "same_password": "Password must be the same",
     "subtitle_home": "Welcome to our store. Wishing you a very happy experience",
     "subtitle_slide_home" : "IMPORT / EXPORT OF TEXTILES - LEFTOVER STOCKS, SAMPLES COLLECTIONS, SURPLUS OF FAMOUS FASHION BRANDS",
-    "empty_cart": "Your shopping cart is currently empty, please continue shopping"
+    "empty_cart": "Your shopping cart is currently empty, please continue shopping",
+    "result_search": "Result Search",
+    "empty_address": "You don't have an address yet, please add an address so you can easily shop",
+    "empty_result_search": "Can't find the product you want",
+    "empty_product": "No products",
+    "empty_street": "Street names cannot be left blank",
+    "confirm_delete": "Do you want delete ?",
+    "success": "Success",
+    "notify_add_cart":"Added to cart",
+    "select_size": "Select a size",
+    "need_login": "Need login",
+    "please_rate": "Please rate at least 1 star",
+    "let_evaluate": "Let's evaluate something",
+    "select_type_pay": "select a pay type",
+    "empty_password": "Password can not be blank"
 }

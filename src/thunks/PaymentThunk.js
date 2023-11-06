@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { API } from "../constants/api";
 import { setAlert } from "../slices/AlertSlice";
-import { setIsFirst, setOrders } from "../slices/OrderSlice";
+import { setIsFirst, setManagerOrder, setOrders } from "../slices/OrderSlice";
 
 export const createPayment = createAsyncThunk(
   "/payment/create",
@@ -149,8 +149,7 @@ export const createOrder = createAsyncThunk(
 );
 export const getOrderByUser = createAsyncThunk(
   "/payment/order/create",
-  async (orderData, { dispatch, rejectWithValue, getState }) => {
-    console.log(orderData);
+  async (_, { dispatch, rejectWithValue, getState }) => {
     try {
       const token = localStorage.getItem("auth_token");
       const resp = await fetch(`${API.uri}/invoice/user/find-by-user`, {
@@ -162,10 +161,124 @@ export const getOrderByUser = createAsyncThunk(
       });
       const jsonData = await resp.json();
       if (resp.status >= 300) {
-        dispatch(setAlert({ type: "error", content: jsonData.defaultMessage }));
+        dispatch(
+          setAlert({
+            type: "error",
+            content:
+              jsonData.defaultMessage ?? "Get orders error please try re-login",
+          })
+        );
         return rejectWithValue("");
       }
       dispatch(setOrders(jsonData));
+    } catch (e) {
+      console.log(e);
+    }
+  }
+);
+
+export const getOrderList = createAsyncThunk(
+  "/payment/order/create",
+  async (_, { dispatch, rejectWithValue, getState }) => {
+    try {
+      const token = localStorage.getItem("auth_token");
+      const resp = await fetch(`${API.uri}/invoice/admin/find-all-list`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const jsonData = await resp.json();
+      if (resp.status >= 300) {
+        dispatch(setAlert({ type: "error", content: jsonData.defaultMessage }));
+        return rejectWithValue("");
+      }
+      dispatch(setManagerOrder(jsonData));
+    } catch (e) {
+      console.log(e);
+    }
+  }
+);
+
+export const confirmOrder = createAsyncThunk(
+  "/payment/order/create",
+  async (id, { dispatch, rejectWithValue, getState }) => {
+    try {
+      const token = localStorage.getItem("auth_token");
+      const resp = await fetch(
+        `${API.uri}/invoice/admin/update-status?idInvoice=${id}&idStatus=2`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const jsonData = await resp.json();
+      if (resp.status >= 300) {
+        dispatch(setAlert({ type: "error", content: jsonData.defaultMessage }));
+        return rejectWithValue("");
+      }
+      dispatch(setAlert({ type: "success", content: "Confirm success" }));
+      dispatch(getOrderList());
+    } catch (e) {
+      console.log(e);
+    }
+  }
+);
+
+export const confirmGetOrder = createAsyncThunk(
+  "/payment/order/create",
+  async (id, { dispatch, rejectWithValue, getState }) => {
+    try {
+      const token = localStorage.getItem("auth_token");
+      const resp = await fetch(
+        `${API.uri}/invoice/admin/update-status?idInvoice=${id}&idStatus=4`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const jsonData = await resp.json();
+      if (resp.status >= 300) {
+        dispatch(setAlert({ type: "error", content: jsonData.defaultMessage }));
+        return rejectWithValue("");
+      }
+      dispatch(setAlert({ type: "success", content: "Confirm success" }));
+      dispatch(getOrderByUser());
+    } catch (e) {
+      console.log(e);
+    }
+  }
+);
+
+export const cancelOrder = createAsyncThunk(
+  "/payment/order/create",
+  async (id, { dispatch, rejectWithValue, getState }) => {
+    try {
+      const token = localStorage.getItem("auth_token");
+      const resp = await fetch(
+        `${API.uri}/invoice/admin/update-status?idInvoice=${id}&idStatus=6`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const jsonData = await resp.json();
+      if (resp.status >= 300) {
+        dispatch(setAlert({ type: "error", content: jsonData.defaultMessage }));
+        return rejectWithValue("");
+      }
+      dispatch(setAlert({ type: "success", content: "Cancel success" }));
+      dispatch(getOrderByUser());
     } catch (e) {
       console.log(e);
     }
