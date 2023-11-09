@@ -19,6 +19,7 @@ import { CheckPayment } from "../container/layout/payment/check_payment";
 import CategoryManager from "../container/admin/category-manager";
 import CategoryCreate from "../container/admin/category-manager/create";
 import CategoryUpdate from "../container/admin/category-manager/update";
+import Search from "../container/layout/search";
 function Router() {
   const setAccountUser = () => {};
   return (
@@ -45,6 +46,7 @@ function Router() {
           path="/address-manager"
           element={<AddressManager setAccountUser={setAccountUser} />}
         />
+        <Route path="/search?query=:query" element={<Search />}></Route>
         <Route path="/admin/product-manager" element={<ProductManager />} />
         <Route path="/admin/product-create" element={<ProductCreate />} />
         <Route path="/admin/user-manager" element={<UserManager />} />

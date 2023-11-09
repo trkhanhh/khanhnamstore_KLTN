@@ -7,6 +7,7 @@ import Pagination from "../component/pagination";
 import { Layout } from "..";
 import { useDispatch, useSelector } from "react-redux";
 import { filterProduct } from "../../../thunks/ProductThunk";
+import { setPage } from "../../../slices/ProductSlice";
 
 function Product() {
   let [searchParams, setSearchParams] = useSearchParams();
@@ -139,7 +140,10 @@ function Product() {
                 </div>
                 <div className="product_item-pride">
                   <p className="text-xs sm:text-sm lg:text-base">
-                    $ {item.price}
+                    {item.price.toLocaleString("it-IT", {
+                      style: "currency",
+                      currency: "VND",
+                    })}
                   </p>
                 </div>
               </div>
@@ -151,7 +155,7 @@ function Product() {
             )}
           </div>
           <nav aria-label="Page navigation example" className=" text-end py-3">
-            <Pagination totalPage={totalPage}></Pagination>
+            <Pagination totalPage={totalPage} setPage={setPage}></Pagination>
           </nav>
         </div>
       </div>

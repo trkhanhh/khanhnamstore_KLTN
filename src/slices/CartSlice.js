@@ -12,11 +12,14 @@ const CartSlice = createSlice({
     },
     addProduct: (state, { payload }) => {
       let products = [...state.products];
-      for (let product of products) {
+      for (let i = 0; i < products.length; i++) {
         if (
-          product.id === payload.id &&
-          product.selectedSize.id === payload.selectedSize.id
+          products[i].id === payload.id &&
+          products[i].selectedSize.id === payload.selectedSize.id
         ) {
+          products[i].quantity += 1;
+          state.products = products;
+          localStorage.setItem("cart", JSON.stringify(products));
           return;
         }
       }
@@ -37,7 +40,10 @@ const CartSlice = createSlice({
     updateProduct: (state, { payload }) => {
       let products = [...state.products];
       for (let i = 0; i < products.length; i++) {
-        if (products[i].id == payload.id) {
+        if (
+          products[i].id == payload.id &&
+          products[i].selectedSize.id == payload.sizeId
+        ) {
           products[i] = { ...products[i], ...payload };
         }
       }

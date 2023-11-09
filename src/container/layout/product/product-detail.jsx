@@ -50,13 +50,11 @@ function ProductDetail() {
 
   const handComment = () => {
     if (rating <= 0) {
-      dispatch(
-        setAlert({ type: t("error"), content: t('please_rate') })
-      );
+      dispatch(setAlert({ type: "error", content: t("please_rate") }));
       return;
     }
     if (comment.trim() === "") {
-      dispatch(setAlert({ type: t("error"), content: t("let_evaluate") }));
+      dispatch(setAlert({ type: "error", content: t("let_evaluate") }));
       return;
     }
     const data = { star: rating, content: comment, product: { id: id } };
@@ -76,7 +74,10 @@ function ProductDetail() {
     setProductSize(selectedColor?.productSizes);
   }, [selectedColor]);
   useLayoutEffect(() => {
-    if (Object.keys(singleProduct).length > 0) {
+    if (
+      Object.keys(singleProduct).length > 0 &&
+      singleProduct?.productCategories?.length > 0
+    ) {
       dispatch(
         getRelatedProduct(singleProduct.productCategories[0].category.id)
       );
@@ -85,11 +86,11 @@ function ProductDetail() {
 
   const handleBuyNow = () => {
     if (!selectedSize) {
-      dispatch(setAlert({ type: t("error"), content: ("select_size") }));
+      dispatch(setAlert({ type: "error", content: "select_size" }));
       return;
     }
     if (Object.keys(user).length === 0) {
-      dispatch(setAlert({ type: t("error"), content: t("need_login") }));
+      dispatch(setAlert({ type: "error", content: t("need_login") }));
       return;
     }
     const product_add = {
@@ -103,11 +104,11 @@ function ProductDetail() {
   };
   const handleAddToCart = () => {
     if (!selectedSize) {
-      dispatch(setAlert({ type: t("error"), content: t("select_size") }));
+      dispatch(setAlert({ type: "error", content: t("select_size") }));
       return;
     }
     if (Object.keys(user).length === 0) {
-      dispatch(setAlert({ type: t("error"), content: t("need_login") }));
+      dispatch(setAlert({ type: "error", content: t("need_login") }));
       return;
     }
     const product_add = {
@@ -231,6 +232,17 @@ function ProductDetail() {
                     </button>
                   </div>
                 </div>
+                <div className="product-quantity py-1">
+                  <h4 className="text-base uppercase py-3 font-medium">
+                    {t("Price")}
+                  </h4>
+                  <h5 className="font-semibold">
+                    {singleProduct?.price?.toLocaleString("it-IT", {
+                      style: "currency",
+                      currency: "VND",
+                    })}
+                  </h5>
+                </div>
                 <div className="product-btn flex justify-between pt-5 sm:pt-2">
                   <div className="w-3/6 pe-3">
                     <button
@@ -257,6 +269,9 @@ function ProductDetail() {
                   <h4 className="text-base uppercase py-3 font-medium">
                     {t("information")}
                   </h4>
+                  {singleProduct?.description?.length <= 0 && (
+                    <p>This product dont have any info</p>
+                  )}
                   <div
                     dangerouslySetInnerHTML={{
                       __html: singleProduct.description,

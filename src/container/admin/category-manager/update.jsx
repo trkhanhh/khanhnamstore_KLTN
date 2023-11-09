@@ -62,7 +62,7 @@ function CategoryUpdate() {
         <HeaderAdmin />
         <div className="w-full overflow-x-hidden">
           <main className="w-full flex-grow p-6">
-            <h1 className="w-full text-3xl pb-6">{t("Add Category")}</h1>
+            <h1 className="w-full text-3xl pb-6">{t("update_category")}</h1>
 
             <div className="flex flex-wrap">
               <div className="w-full  my-6 pr-0 lg:pr-2">
@@ -73,10 +73,10 @@ function CategoryUpdate() {
                         className="block text-base text-gray-600"
                         htmlFor="name"
                       >
-                        {t("Category name")}
+                        {t("category_name")}
                       </label>
                       <input
-                        defaultValue={manager.updateCategory.name}
+                        value={cat.name}
                         onChange={(e) => {
                           setCat({ ...cat, name: e.target.value });
                         }}
@@ -85,7 +85,7 @@ function CategoryUpdate() {
                         name="name"
                         type="text"
                         required
-                        placeholder={t("Enter category name")}
+                        placeholder={t("enter_category_name")}
                         aria-label="Name"
                       />
                     </div>
@@ -94,7 +94,7 @@ function CategoryUpdate() {
                         className="block text-base text-gray-600"
                         htmlFor="name"
                       >
-                        {t("Category parent")}
+                        {t("category_parent")}
                       </label>
                       <select
                         onChange={(e) =>
@@ -102,7 +102,7 @@ function CategoryUpdate() {
                         }
                         className="w-full px-5 py-2 text-sm  text-gray-700 bg-gray-200 rounded"
                       >
-                        <option value={-1}>Parent category</option>
+                        <option value={-1}>{t("category_parent")}</option>
                         {categories
                           .filter((cat) => cat.id != manager.updateCategory.id)
                           .map((val, index) => {
@@ -119,7 +119,7 @@ function CategoryUpdate() {
                         className="block text-base text-gray-600"
                         htmlFor="txtName"
                       >
-                        {t("category images")}
+                        {t("category_images")}
                       </label>
                       <input
                         onChange={(e) => {

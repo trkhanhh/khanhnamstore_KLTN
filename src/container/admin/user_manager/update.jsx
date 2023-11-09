@@ -63,7 +63,7 @@ function UserUpdate() {
                         name="password"
                         type="text"
                         required
-                        placeholder={t("enter_email")}
+                        placeholder={t("enter_password")}
                         aria-label="password"
                       />
                     </div>

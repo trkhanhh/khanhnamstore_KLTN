@@ -29,7 +29,7 @@ function UserProfile({ setAccountUser }) {
       if (userUpdate.phone.toLowerCase().length !== 10) {
         dispatch(
           setAlert({
-            type: t("error"),
+            type: "error",
             content: t("notify_format_phone"),
           })
         );
@@ -57,7 +57,7 @@ function UserProfile({ setAccountUser }) {
       if (oldPassword.length <= 0) {
         dispatch(
           setAlert({
-            type: t("error"),
+            type: "error",
             content: t("notify_valid_old_password"),
           })
         );
@@ -66,7 +66,7 @@ function UserProfile({ setAccountUser }) {
       if (newPassword.length <= 0) {
         dispatch(
           setAlert({
-            type: t("error"),
+            type: "error",
             content: t("notify_valid_new_password"),
           })
         );

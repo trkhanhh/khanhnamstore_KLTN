@@ -14,11 +14,11 @@ function Payment() {
   const [t] = useTranslation("app");
   const dispatch = useDispatch();
   const nav = useNavigate();
-  const handleDecrease = (id, quan) => {
-    dispatch(updateProduct({ id, quantity: quan - 1 }));
+  const handleDecrease = (id, quan, sizeId) => {
+    dispatch(updateProduct({ id, quantity: quan - 1, sizeId }));
   };
-  const handleIncrease = (id, quan) => {
-    dispatch(updateProduct({ id, quantity: quan + 1 }));
+  const handleIncrease = (id, quan, sizeId) => {
+    dispatch(updateProduct({ id, quantity: quan + 1, sizeId }));
   };
   const handleRemoveProduct = (id) => {
     dispatch(removeProduct(id));
@@ -47,13 +47,6 @@ function Payment() {
             />
             <Link to="/" className="uppercase text-xs px-1">
               {t("product")}
-            </Link>
-            <FontAwesomeIcon
-              icon={faChevronRight}
-              style={{ fontSize: "10px" }}
-            />
-            <Link to="/" className="uppercase text-xs px-1">
-              LOREMIPSUM PRODUCTS
             </Link>
             <FontAwesomeIcon
               icon={faChevronRight}
@@ -90,7 +83,7 @@ function Payment() {
                     <tbody>
                       {products.map((product, index) => {
                         return (
-                          <tr class="hover:bg-grey-lighter">
+                          <tr key={index} class="hover:bg-grey-lighter">
                             <td class="py-4 px-3">
                               <div className="flex flex-col sm:grid grid-cols-4 gap-5 ">
                                 <div className="">
@@ -118,7 +111,10 @@ function Payment() {
                                       {t("price")} :{" "}
                                     </span>
                                     <span className="text-xs md:text-sm lg:text-base">
-                                      $ {product.price}
+                                      {product.price.toLocaleString("it-IT", {
+                                        style: "currency",
+                                        currency: "VND",
+                                      })}
                                     </span>
                                   </div>
                                 </div>
@@ -132,7 +128,8 @@ function Payment() {
                                     if (product.quantity - 1 >= 1) {
                                       handleDecrease(
                                         product.id,
-                                        product.quantity
+                                        product.quantity,
+                                        product.selectedSize.id
                                       );
                                     }
                                   }}
@@ -149,7 +146,8 @@ function Payment() {
                                   onClick={() => {
                                     handleIncrease(
                                       product.id,
-                                      product.quantity
+                                      product.quantity,
+                                      product.selectedSize.id
                                     );
                                   }}
                                 >
@@ -158,7 +156,12 @@ function Payment() {
                               </div>
                             </td>
                             <td className=" my-auto text-xs md:text-sm">
-                              $ {product.quantity * product.price}
+                              {(
+                                product.quantity * product.price
+                              ).toLocaleString("it-IT", {
+                                style: "currency",
+                                currency: "VND",
+                              })}
                             </td>
                             <td className=" text-end pe-4">
                               <button
@@ -184,10 +187,15 @@ function Payment() {
                 <div className="payment-bill-detail border border-black p-3 w-full sm:w-4/12">
                   <div className="grid grid-cols-2 gap-4">
                     <div className="title">
-                      <p className="text-base font-medium">  {t("sum_money")}</p>
+                      <p className="text-base font-medium"> {t("sum_money")}</p>
                     </div>
                     <div className="text-end">
-                      <p className="text-base">$ {amount}</p>
+                      <p className="text-base">
+                        {amount.toLocaleString("it-IT", {
+                          style: "currency",
+                          currency: "VND",
+                        })}
+                      </p>
                     </div>
                   </div>
                   <div className="w-full text-center ">

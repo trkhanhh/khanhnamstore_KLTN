@@ -64,7 +64,7 @@ function Orders({ setAccountUser }) {
                 {orders.length == 0 ? (
                   <div className="order-detail text-center ">
                     <img src={no_Order} alt="product" className="mx-auto" />
-                    <p>{t("Your orders is empty")}</p>
+                    <p>{t("your_orders_is_empty")}</p>
                   </div>
                 ) : (
                   orders.map((order, index) => {
@@ -82,7 +82,7 @@ function Orders({ setAccountUser }) {
                             </div>
                             <div className="col-span-5 lg:col-span-3 sm:col-span-2 ">
                               <p className="text-xs">
-                                ORDER {order.id} - {order.createdDate} -{" "}
+                                {t("ORDER")} {order.id} - {order.createdDate} -{" "}
                                 {order.createdTime}
                               </p>
                               <p className=" font-semibold text-base sm:text-base lg:text-xl py-2">
@@ -126,7 +126,7 @@ function Orders({ setAccountUser }) {
                             </div>
                             {order.status.id == 6 ? (
                               <p className="text-rose-400 text-center">
-                                Order cancel
+                                  {t("order_cancel")}
                               </p>
                             ) : (
                               <div className="my-auto">

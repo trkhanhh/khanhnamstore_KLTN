@@ -115,10 +115,10 @@ function CategoryManager() {
                         STT
                       </th>
                       <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
-                        {t("Category Name")}
+                        {t("category_name")}
                       </th>
                       <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
-                        Image
+                        {t('image')}
                       </th>
                       <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
                         {t("operate")}
@@ -153,7 +153,7 @@ function CategoryManager() {
                                 to={`/admin/category-edit/${cat.id}`}
                                 className="border border-yellow-400 text-white uppercase py-2 px-3 bg-yellow-400 rounded-lg mt-3 mx-1 text-xs"
                               >
-                                Edit
+                                {t('edit')}
                               </Link>
                               <button
                                 onClick={() => {
@@ -161,7 +161,7 @@ function CategoryManager() {
                                 }}
                                 className="border border-rose-600 text-white uppercase py-2 px-3 bg-rose-600 rounded-lg mt-3 mx-1 text-xs"
                               >
-                                DELETE
+                                {t('delete')}
                               </button>
                             </td>
                           </tr>

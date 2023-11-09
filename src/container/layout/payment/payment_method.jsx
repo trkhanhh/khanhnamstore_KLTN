@@ -19,6 +19,7 @@ function PaymentMethod() {
   const [t] = useTranslation("app");
   const nav = useNavigate();
   const [address, setAddress] = useState();
+  const shippingCash = 20000;
   useLayoutEffect(() => {
     if (addresses.length <= 0) {
       dispatch(getAllAddressByUser());
@@ -39,7 +40,7 @@ function PaymentMethod() {
   }, [products]);
   const handlePay = () => {
     if (payType === "") {
-      dispatch(setAlert({ type: t("error"), content: t("select_type_pay") }));
+      dispatch(setAlert({ type: "error", content: t("select_type_pay") }));
     }
     if (payType === "PAYMENT_MOMO") {
       dispatch(
@@ -58,7 +59,6 @@ function PaymentMethod() {
           addressId: address,
         })
       );
-      // nav("/orders");
     }
     if (payType === "PAYMENT_DELIVERY") {
       dispatch(
@@ -90,13 +90,6 @@ function PaymentMethod() {
             />
             <Link to="/" className="uppercase text-xs px-1">
               {t("product")}
-            </Link>
-            <FontAwesomeIcon
-              icon={faChevronRight}
-              style={{ fontSize: "10px" }}
-            />
-            <Link to="/" className="uppercase text-xs px-1">
-              LOREMIPSUM PRODUCTS
             </Link>
             <FontAwesomeIcon
               icon={faChevronRight}
@@ -182,19 +175,14 @@ function PaymentMethod() {
                   <div className="payment-bill-detail">
                     <div className="grid grid-cols-2 gap-4 py-1">
                       <div className="title">
-                        <p className="text-base font-medium">{t("subtotal")}</p>
-                      </div>
-                      <div>
-                        <p className="text-sm font-normal">$10.00</p>
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-2 gap-4 py-1">
-                      <div className="title">
                         <p className="text-base font-medium">{t("ship")}</p>
                       </div>
                       <div>
                         <p className="text-sm font-normal">
-                          Calculated at next step
+                          {shippingCash.toLocaleString("it-IT", {
+                            style: "currency",
+                            currency: "VND",
+                          })}
                         </p>
                       </div>
                     </div>
@@ -203,10 +191,14 @@ function PaymentMethod() {
                         <p className="text-base font-medium">
                           {t("order_information")}
                         </p>
-                        <p className="text-xs">Including $10.00 in taxes</p>
                       </div>
                       <div>
-                        <p className="text-sm font-normal">${amount + 10}</p>
+                        <p className="text-sm font-normal">
+                          {(amount + shippingCash).toLocaleString("it-IT", {
+                            style: "currency",
+                            currency: "VND",
+                          })}
+                        </p>
                       </div>
                     </div>
                   </div>

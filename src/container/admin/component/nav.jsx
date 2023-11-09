@@ -29,7 +29,7 @@ function NavAdmin() {
               activeLink === "/admin/product-manager" ? "active" : "" // Áp dụng lớp "active" nếu liên kết được chọn
             }`}
           >
-            {t("Category Manager")}
+            {t("category_manager")}
           </Link>
           <Link
             to="/admin/product-manager"
@@ -64,7 +64,7 @@ function NavAdmin() {
           className="absolute w-full upgrade-btn bottom-0 active-nav-link text-white flex items-center justify-center py-4"
         >
           <i className="fas fa-arrow-circle-up mr-3"></i>
-          Upgrade to Pro!
+          {t('update_pro')}
         </Link>
       </aside>
     </div>

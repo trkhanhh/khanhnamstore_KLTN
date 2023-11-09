@@ -4,15 +4,18 @@ import {
   setNewCollection,
   setNewProduct,
   setPage,
+  setPageSearch,
   setProductColorManager,
   setProductComment,
   setProductManager,
   setProductUpdate,
   setProducts,
   setRelatedProduct,
+  setSearch,
   setSingleProduct,
   setSingleProductComment,
   setTotalPage,
+  setTotalPageSearch,
 } from "../slices/ProductSlice";
 import { setAlert } from "../slices/AlertSlice";
 
@@ -264,6 +267,7 @@ export const updateProduct = createAsyncThunk(
   "/product/update",
   async (data, { dispatch, rejectWithValue }) => {
     try {
+      console.log("here");
       const token = localStorage.getItem("auth_token");
       const resp = await fetch(`${API.uri}/product/admin/update`, {
         method: "POST",
@@ -335,7 +339,7 @@ export const getAllProductColorList = createAsyncThunk(
 );
 
 export const deleteProduct = createAsyncThunk(
-  "admin/product/de;ete",
+  "admin/product/delete",
   async (id, { dispatch, rejectWithValue }) => {
     try {
       const token = localStorage.getItem("auth_token");
@@ -361,6 +365,32 @@ export const deleteProduct = createAsyncThunk(
       dispatch(
         setAlert({ type: "error", content: "Error when delete product" })
       );
+    }
+  }
+);
+
+export const searchProduct = createAsyncThunk(
+  "/product/search",
+  async (data, { dispatch }) => {
+    try {
+      let uri = `${API.uri}/product/public/findByParam?q=${data.query}&page=${
+        data.page ? data.page : 0
+      }&size=12`;
+
+      const resp = await fetch(uri, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (resp.status >= 200 && resp.status < 300) {
+        const jsonData = await resp.json();
+        dispatch(setSearch(jsonData.content));
+        dispatch(setTotalPageSearch(jsonData.totalPages));
+        dispatch(setPageSearch(data.page ? data.page : 0));
+      }
+    } catch (e) {
+      console.log(e);
     }
   }
 );

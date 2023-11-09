@@ -78,8 +78,8 @@ function UserCreate() {
                         className="w-full px-5 py-2 text-sm  text-gray-700 bg-gray-200 rounded"
                         type="text"
                         required
-                        placeholder={t("Enter phone")}
-                        aria-label="confirmPassword"
+                        placeholder={t("enter_phone")}
+                        aria-label="confirmPhone"
                       />
                     </div>
                     <div className="mt-2">
@@ -98,7 +98,7 @@ function UserCreate() {
                         name="password"
                         type="text"
                         required
-                        placeholder={t("Enter password")}
+                        placeholder={t("enter_password")}
                         aria-label="password"
                       />
                     </div>

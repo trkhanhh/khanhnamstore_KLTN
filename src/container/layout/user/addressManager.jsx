@@ -67,7 +67,7 @@ function AddressManager({ setAccountUser }) {
   useLayoutEffect(() => {}, [selectedWard]);
   const handleAddNewAddress = () => {
     if (street.trim().length <= 0) {
-      dispatch(setAlert({ type: t("error"), content: t("empty_street") }));
+      dispatch(setAlert({ type: "error", content: t("empty_street") }));
       return;
     }
     const data = {
@@ -196,7 +196,7 @@ function AddressManager({ setAccountUser }) {
                                 handleDelete(add.id);
                               }}
                             >
-                              Delete
+                              {t("delete")}
                             </button>
                           </div>
                         </div>
@@ -241,7 +241,7 @@ function AddressManager({ setAccountUser }) {
                     d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
                   />
                 </svg>
-                <span className="sr-only">Close modal</span>
+                <span className="sr-only">{t("close_modal")}</span>
               </button>
             </div>
             <div class="p-6 space-y-6">

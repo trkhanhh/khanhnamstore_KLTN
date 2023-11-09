@@ -36,7 +36,7 @@ function HomePage() {
   }, []);
   const handleSendFeedBack = () => {
     if (email.trim() == "") {
-      dispatch(setAlert({ type: t("error"), content: t("notify_valid_email") }));
+      dispatch(setAlert({ type: "error", content: t("notify_valid_email") }));
       return;
     }
     dispatch(sendFeedBack());
@@ -121,7 +121,10 @@ function HomePage() {
                     </div>
                     <div className="product_item-pride">
                       <p className="text-xs sm:text-sm lg:text-base">
-                        $ {pro.price}
+                        {pro.price.toLocaleString("it-IT", {
+                          style: "currency",
+                          currency: "VND",
+                        })}
                       </p>
                     </div>
                   </div>
@@ -166,7 +169,10 @@ function HomePage() {
                       </div>
                       <div className="product_item-pride">
                         <p className="text-xs sm:text-sm lg:text-base">
-                          $ {pro.price}
+                          {pro.price.toLocaleString("it-IT", {
+                            style: "currency",
+                            currency: "VND",
+                          })}
                         </p>
                       </div>
                     </div>

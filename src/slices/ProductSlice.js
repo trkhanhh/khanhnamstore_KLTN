@@ -2,6 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initState = {
   products: [],
+  search: [],
+  totalPageSearch: 0,
+  pageSearch: 0,
   totalPage: 0,
   page: 0,
   singleProduct: {},
@@ -21,6 +24,15 @@ const ProductSlice = createSlice({
   name: "products",
   initialState: initState,
   reducers: {
+    setSearch: (state, { payload }) => {
+      state.search = payload;
+    },
+    setTotalPageSearch: (state, { payload }) => {
+      state.totalPageSearch = payload;
+    },
+    setPageSearch: (state, { payload }) => {
+      state.pageSearch = payload;
+    },
     setProductUpdate: (state, { payload }) => {
       state.manager.productUpdate = payload;
     },
@@ -77,6 +89,9 @@ export const {
   setProductManager,
   setAdminSearch,
   setProductUpdate,
+  setPageSearch,
+  setSearch,
+  setTotalPageSearch,
 } = ProductSlice.actions;
 
 export default ProductSlice.reducer;

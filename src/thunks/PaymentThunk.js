@@ -142,6 +142,7 @@ export const createOrder = createAsyncThunk(
           content: "Xác nhận thành công , đã tạo đơn hàng",
         })
       );
+      dispatch(getOrderByUser());
     } catch (e) {
       console.log(e);
     }

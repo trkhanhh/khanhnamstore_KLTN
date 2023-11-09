@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { setPage } from "../../../slices/ProductSlice";
 
-function Pagination({ totalPage }) {
+function Pagination({ totalPage,setPage }) {
   const dispatch = useDispatch();
   const arrPage = [];
   for (let i = 1; i <= totalPage; i++) {

@@ -161,7 +161,7 @@ function ProductManager() {
                               <button
                                 onClick={() => {
                                   if (
-                                    window.confirm("Do you want realy delete ?")
+                                    window.confirm(t("confirm_delete"))
                                   ) {
                                     dispatch(deleteProduct(product.id));
                                   }
