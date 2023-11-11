@@ -1,7 +1,7 @@
 import { useLayoutEffect, useState } from "react";
 import no_Order from "../../../asset/images/E-Commerce.png";
 import { useTranslation } from "react-i18next";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import NavbarMini from "../component/nav_mini";
@@ -75,7 +75,7 @@ function Orders({ setAccountUser }) {
                             <div className="col-span-5 sm:col-span-1">
                               <img
                                 className="object-fit-cover"
-                                src={order.detail[0].linkImage}
+                                src={order?.detail[0]?.linkImage}
                                 alt="product"
                                 height="170px"
                               />
@@ -86,12 +86,12 @@ function Orders({ setAccountUser }) {
                                 {order.createdTime}
                               </p>
                               <p className=" font-semibold text-base sm:text-base lg:text-xl py-2">
-                                {order.detail[0].productName}
+                                {order?.detail[0]?.productName}
                               </p>
                               <div className="text-sm  lg:text-base py-1">
                                 <span>{t("size")} : </span>
                                 <span>
-                                  {order.detail[0].productSize.sizeName}
+                                  {order?.detail[0]?.productSize?.sizeName}
                                 </span>
                               </div>
                               <div className="text-sm  lg:text-base py-1">
@@ -126,7 +126,7 @@ function Orders({ setAccountUser }) {
                             </div>
                             {order.status.id == 6 ? (
                               <p className="text-rose-400 text-center">
-                                  {t("order_cancel")}
+                                {t("order_cancel")}
                               </p>
                             ) : (
                               <div className="my-auto">

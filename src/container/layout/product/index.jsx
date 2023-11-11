@@ -43,6 +43,9 @@ function Product() {
     dispatch(filterProduct({ page: page }));
   }, [page]);
 
+  useLayoutEffect(() => {
+    dispatch(filterProduct({ category_id: searchParams.get("category") }));
+  }, [searchParams]);
   return (
     <Layout>
       <div className="pt-20 mt-8 px-4">

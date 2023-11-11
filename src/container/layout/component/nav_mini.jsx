@@ -126,7 +126,6 @@ function NavbarMini() {
     return (
         <ul>
             {navLinks.map((link, index) => {
-                let isAdmin = user.authorities.name == "ROLE_ADMIN";
                 return (
                     <NavLink item={link} children={<Children data={link} />} />
                 );
