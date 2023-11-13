@@ -117,42 +117,44 @@ function OrdersManager() {
                     </tr>
                   </thead>
                   <tbody>
-                    {search.slice((page - 1) * 10, page * 10).map((od) => {
-                      return (
-                        <tr className="hover:bg-grey-lighter">
-                          <td className="py-4 px-6 border-b border-grey-light">
-                            {od.id}
-                          </td>
-                          <td className="py-4 px-6 border-b border-grey-light">
-                            {od.receiverName}
-                          </td>
-                          <td className="py-4 px-6 border-b border-grey-light">
-                            {od.totalAmount.toLocaleString("it-IT", {
-                              style: "currency",
-                              currency: "VND",
-                            })}
-                          </td>
-                          <td className="py-4 px-6 border-b border-grey-light">
-                            {od.status.name}
-                          </td>
-                          <td className="py-4 px-6 border-b border-grey-light">
-                            {od.createdDate}
-                          </td>
-                          <td className="py-4 px-6 border-b border-grey-light">
-                            {od.status.id == 1 && (
-                              <button
-                                onClick={() => {
-                                  handleConfirmOrder(od.id);
-                                }}
-                                className="border border-blue-600 text-white uppercase py-2 px-3 bg-blue-600 rounded-lg mt-3 mx-1 text-xs"
-                              >
-                                {t("confirm_order")}
-                              </button>
-                            )}
-                          </td>
-                        </tr>
-                      );
-                    })}
+                    {search
+                      .slice((page - 1) * 10, page * 10)
+                      .map((od, index) => {
+                        return (
+                          <tr className="hover:bg-grey-lighter">
+                            <td className="py-4 px-6 border-b border-grey-light">
+                              {index + 1}
+                            </td>
+                            <td className="py-4 px-6 border-b border-grey-light">
+                              {od.receiverName}
+                            </td>
+                            <td className="py-4 px-6 border-b border-grey-light">
+                              {od.totalAmount.toLocaleString("it-IT", {
+                                style: "currency",
+                                currency: "VND",
+                              })}
+                            </td>
+                            <td className="py-4 px-6 border-b border-grey-light">
+                              {od.status.name}
+                            </td>
+                            <td className="py-4 px-6 border-b border-grey-light">
+                              {od.createdDate}
+                            </td>
+                            <td className="py-4 px-6 border-b border-grey-light">
+                              {od.status.id == 1 && (
+                                <button
+                                  onClick={() => {
+                                    handleConfirmOrder(od.id);
+                                  }}
+                                  className="border border-blue-600 text-white uppercase py-2 px-3 bg-blue-600 rounded-lg mt-3 mx-1 text-xs"
+                                >
+                                  {t("confirm_order")}
+                                </button>
+                              )}
+                            </td>
+                          </tr>
+                        );
+                      })}
                   </tbody>
                 </table>
               </div>

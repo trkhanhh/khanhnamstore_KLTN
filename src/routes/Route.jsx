@@ -46,7 +46,7 @@ function Router() {
           path="/address-manager"
           element={<AddressManager setAccountUser={setAccountUser} />}
         />
-        <Route path="/search?query=:query" element={<Search />}></Route>
+        <Route path="/search/:query" element={<Search />}></Route>
         <Route path="/admin/product-manager" element={<ProductManager />} />
         <Route path="/admin/product-create" element={<ProductCreate />} />
         <Route path="/admin/user-manager" element={<UserManager />} />

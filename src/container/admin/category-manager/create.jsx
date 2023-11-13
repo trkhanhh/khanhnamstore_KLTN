@@ -18,15 +18,17 @@ function CategoryCreate() {
   const [imageBannerUploaded, setImageBannedUploaded] = useState();
   const handleCreateCategory = async () => {
     if (Object.keys(cat).length == 0 || cat?.name == "") {
-      dispatch(setAlert({ type: t('error'), content: t("form_invalid") }));
+      dispatch(setAlert({ type: t("error"), content: t("form_invalid") }));
       return;
     }
-    await upload(imageBanner, handleSetImage);
+    if (imageBanner) {
+      await upload(imageBanner, handleSetImage);
+    }
     let category = categories.filter((cat) => cat.id == cat.category);
     const data = {
       name: cat.name,
       isPrimary: cat?.category ? cat.category == -1 : true,
-      imageBanner: imageBannerUploaded,
+      imageBanner: imageBannerUploaded || "",
       category: category ? category[0] : null,
     };
     dispatch(addCategory(data));

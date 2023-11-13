@@ -123,7 +123,7 @@ function UserManager() {
                         return (
                           <tr key={index} className="hover:bg-grey-lighter">
                             <td className="py-4 px-6 border-b border-grey-light">
-                              {user.id}
+                              {index + 1}
                             </td>
                             <td className="py-4 px-6 border-b border-grey-light">
                               {user.fullname}

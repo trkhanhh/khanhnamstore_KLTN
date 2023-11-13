@@ -10,7 +10,6 @@ import logoipsum_2 from "../../asset/images/logoipsum_2.png";
 import logoipsum_3 from "../../asset/images/logoipsum_3.png";
 import { Link } from "react-router-dom";
 import SlideProduct from "./component/slide_product";
-import { comments } from "../../data";
 import { Layout } from ".";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -31,7 +30,7 @@ function HomePage() {
   const dispatch = useDispatch();
   useLayoutEffect(() => {
     dispatch(getNewProduct());
-    dispatch(getNewCollection());
+   
     dispatch(getProductComment());
   }, []);
   const handleSendFeedBack = () => {

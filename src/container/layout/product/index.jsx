@@ -40,7 +40,13 @@ function Product() {
   };
 
   useLayoutEffect(() => {
-    dispatch(filterProduct({ page: page }));
+    if (searchParams.get("category")) {
+      dispatch(
+        filterProduct({ page: page, category_id: searchParams.get("category") })
+      );
+    } else {
+      dispatch(filterProduct({ page: page }));
+    }
   }, [page]);
 
   useLayoutEffect(() => {

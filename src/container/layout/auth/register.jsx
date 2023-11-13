@@ -2,7 +2,6 @@ import { useState } from "react";
 import iconEyeClose from "../../../asset/images/eye-closed.png";
 import iconEye from "../../../asset/images/eye.png";
 import styled from "styled-components";
-import { account } from "../../../data";
 import validator from "validator";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";

@@ -7,7 +7,6 @@ import { Layout } from "..";
 import { useDispatch, useSelector } from "react-redux";
 import { removeProduct, updateProduct } from "../../../slices/CartSlice";
 import { useLayoutEffect, useState } from "react";
-import cloth from "../../../asset/images/cloth_1.png";
 function Payment() {
   const { products } = useSelector((state) => state.cartReducer);
   const [amount, setAmount] = useState(0);
@@ -104,6 +103,14 @@ function Payment() {
                                     </span>
                                     <span className="text-xs md:text-sm lg:text-base">
                                       {product.selectedSize.sizeName}
+                                    </span>
+                                  </div>
+                                  <div className="product-size py-1">
+                                    <span className="text-xs md:text-sm lg:text-base">
+                                      {t("Color")} :{" "}
+                                    </span>
+                                    <span className="text-xs md:text-sm lg:text-base">
+                                      {product.selectedColor.colorName}
                                     </span>
                                   </div>
                                   <div className="product-size py-1">

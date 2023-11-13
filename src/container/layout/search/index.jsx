@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useParams, useSearchParams } from "react-router-dom";
+import { Link, useParams, useRoutes, useSearchParams } from "react-router-dom";
 import { Layout } from "..";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import Pagination from "../component/pagination";
@@ -10,31 +10,30 @@ import { searchProduct } from "../../../thunks/ProductThunk";
 import { setPageSearch } from "../../../slices/ProductSlice";
 
 function Search() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const { query } = useParams();
   const [t] = useTranslation("app");
   const { totalPageSearch, pageSearch, search } = useSelector(
     (state) => state.productReducer
   );
   const dispatch = useDispatch();
   useLayoutEffect(() => {
-    if (searchParams.get("query")) {
-      dispatch(searchProduct({ query: searchParams.get("query") }));
+    if (query) {
+      dispatch(searchProduct({ query: query }));
     }
   }, []);
   useLayoutEffect(() => {
-    dispatch(
-      searchProduct({ query: searchParams.get("query"), page: pageSearch })
-    );
+    dispatch(searchProduct({ query: query, page: pageSearch }));
   }, [pageSearch]);
   useLayoutEffect(() => {
+    console.log("query::", query);
     dispatch(
       searchProduct({
-        query: searchParams.get("query"),
+        query: query,
       })
     );
-  }, [searchParams]);
+  }, [query]);
   useLayoutEffect(() => {
-    console.log(search);
+    console.log("rs : ", search);
   }, [search]);
   return (
     <Layout>

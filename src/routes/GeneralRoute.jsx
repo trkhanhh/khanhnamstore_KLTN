@@ -24,7 +24,7 @@ export const GeneralRoute = (props) => {
         <Route path="/register" element={<Register />} />
         <Route path="/success-register" element={<SuccessRegister />} />
         <Route path="/check-payment" element={<CheckPayment />} />
-        <Route path="/search?query=:query" element={<Search />}></Route>
+        <Route path="/search/:query" element={<Search />}></Route>
         <Route path="*" element={<HomePage />} />
       </Routes>
     </BrowserRouter>

@@ -118,7 +118,7 @@ function CategoryManager() {
                         {t("category_name")}
                       </th>
                       <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
-                        {t('image')}
+                        {t("image")}
                       </th>
                       <th className="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
                         {t("operate")}
@@ -132,7 +132,7 @@ function CategoryManager() {
                         return (
                           <tr key={index} className="hover:bg-grey-lighter">
                             <td className="py-4 px-6 border-b border-grey-light">
-                              {cat.id}
+                              {index + 1}
                             </td>
                             <td className="py-4 px-6 border-b border-grey-light">
                               {cat.name}
@@ -153,7 +153,7 @@ function CategoryManager() {
                                 to={`/admin/category-edit/${cat.id}`}
                                 className="border border-yellow-400 text-white uppercase py-2 px-3 bg-yellow-400 rounded-lg mt-3 mx-1 text-xs"
                               >
-                                {t('edit')}
+                                {t("edit")}
                               </Link>
                               <button
                                 onClick={() => {
@@ -161,7 +161,7 @@ function CategoryManager() {
                                 }}
                                 className="border border-rose-600 text-white uppercase py-2 px-3 bg-rose-600 rounded-lg mt-3 mx-1 text-xs"
                               >
-                                {t('delete')}
+                                {t("delete")}
                               </button>
                             </td>
                           </tr>

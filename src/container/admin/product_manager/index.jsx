@@ -123,7 +123,7 @@ function ProductManager() {
                         return (
                           <tr key={index} className="hover:bg-grey-lighter">
                             <td className="py-4 px-6 border-b border-grey-light">
-                              {product.id}
+                              {index + 1}
                             </td>
                             <td className="py-4 px-6 border-b border-grey-light">
                               {product.name}
@@ -160,9 +160,7 @@ function ProductManager() {
                               </Link>
                               <button
                                 onClick={() => {
-                                  if (
-                                    window.confirm(t("confirm_delete"))
-                                  ) {
+                                  if (window.confirm(t("confirm_delete"))) {
                                     dispatch(deleteProduct(product.id));
                                   }
                                 }}

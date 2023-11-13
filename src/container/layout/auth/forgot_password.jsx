@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { setAlert } from "../../../slices/AlertSlice";
-import { OTP_TYPE } from "../../../constants/enum";
 import { forgotPassword } from "../../../thunks/AuthThunk";
 import { Layout } from "..";
 
