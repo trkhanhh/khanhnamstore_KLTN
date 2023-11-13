@@ -18,7 +18,7 @@ function NavAdmin() {
             to="/admin"
             className="text-white text-3xl font-semibold uppercase hover:text-gray-300"
           >
-            Admin
+            KN Store
           </Link>
         </div>
         <nav className="text-white text-base font-semibold pt-3">

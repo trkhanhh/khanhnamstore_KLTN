@@ -17,10 +17,10 @@ function Footer() {
             </div>
             <div className="py-5">
               <p className="text-sm font-normal leading-6">
-                Email: duyscott.work@gmail.com
+                Email: trongkhanhmai@gmail.com
               </p>
               <p className="text-sm font-normal leading-6">
-                Hotline: 0123.456.789
+                Hotline: 0998.998.998
               </p>
             </div>
             <h3 className="text-xl sm:text-2xl">{t("social_network")}</h3>
@@ -46,34 +46,34 @@ function Footer() {
               <p className="text-xs sm:text-sm leading-6 font-light">
                 CS1: 108 Trần Phú, Hà Đông, Hà Nội
               </p>
-              <p className="text-xs sm:text-sm leading-6 font-light">
-                CS1: 108 Trần Phú, Hà Đông, Hà Nội
+              <p className="text-xs sm:text-sm leading-6 font-light pt-4">
+                CS2: 49-51 Hồ Đắc Di, Phường Nam Đồng, Đống Đa, Hà Nội
               </p>
             </div>
             <div className="address-1 pt-2">
               <h5 className="py-2 text-sm sm:text-base">TP.HCM</h5>
               <p className="text-xs sm:text-sm  font-light leading-6 ">
-                CS1: 108 Trần Phú, Hà Đông, Hà Nội
+                CS1: 26 Nguyễn Trãi, phường Bến Thành, Quận 1, TP.Hồ Chí Minh
               </p>
-              <p className="text-xs sm:text-sm  font-light leading-6">
-                CS1: 108 Trần Phú, Hà Đông, Hà Nội
+              <p className="text-xs sm:text-sm  font-light leading-6 pt-4">
+                CS2: The New Playground 26 Lý Tự Trọng, Phường Bến Nghé, Quận 1, TP.Hồ Chí Minh
               </p>
             </div>
           </div>
           <div className="py-2">
             <h3 className="text-xl sm:text-2xl"> {t("policy")}</h3>
             <div className="py-5">
-              <p className=" text-xs sm:text-sm leading-8">
+              <p className=" text-xs sm:text-sm leading-8 pt-2">
                 {t("privacy_policy")}
               </p>
               <p className="leading-8 text-xs sm:text-sm">FAQ</p>
-              <p className=" text-xs sm:text-sm leading-7">
+              <p className=" text-xs sm:text-sm leading-7 pt-2">
                 {t("membership_card_policy")}
               </p>
-              <p className=" text-xs sm:text-sm leading-7">
+              <p className=" text-xs sm:text-sm leading-7 pt-2">
                 {t("warranty_return_policy")}
               </p>
-              <p className=" text-xs sm:text-sm leading-7">
+              <p className=" text-xs sm:text-sm leading-7 pt-2">
                 {t("express_delivery_policy")}
               </p>
             </div>
@@ -90,7 +90,7 @@ function Footer() {
           </div>
         </div>
         <p className="text-xs sm:text-sm text-white text-center pt-5">
-          Copyright 2022 by Duy Scott All Right Reserves.
+          Copyright © 2023 by Trong Khanh Mai. 
         </p>
       </div>
     </div>

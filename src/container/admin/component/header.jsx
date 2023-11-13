@@ -15,8 +15,8 @@ function HeaderAdmin() {
         >
           <img
             className="w-8 h-8 rounded-full"
-            src="https://cce.edu.vn/wp-content/uploads/2023/06/hinh-anh-hoat-hinh-de-thuong-1-600x600.jpg"
-            alt="user photo"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuCMrmBA9GKfQaOpWqAe32SGueqySAEjPkEA5UzwpkiMn_bOZAKtlvC5Sd8si3w2VT9BE&usqp=CAU"
+            alt="Admin photo"
           />
         </button>
         <div
